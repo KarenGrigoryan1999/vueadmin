@@ -1,7 +1,7 @@
 module.exports = {
   devServer: {
     host: "lvh.me",
-    port: 80,
+    port: 5000,
     hot: true
   },
 
