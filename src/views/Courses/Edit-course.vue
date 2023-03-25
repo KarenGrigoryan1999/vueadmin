@@ -1,5 +1,6 @@
 <template lang="pug">
-.container-fluid.pt-5
+loader(v-if="!isReady")
+.container-fluid.pt-5(v-if="isReady")
   .row
     .col-xl-8.el-col-offset-3.order-xl-1
       card(type="secondary").shadow
@@ -79,8 +80,8 @@
 
             .row
               .col-lg-12
-                base-input(alternative="" label="Уроки" v-if="isReady")
-                  lessons.mt-2(:lessons="lessons" @delete-lesson="deleteLesson" @delete-test="deleteTest" @lesson-updated="updateLesson" @lesson-saved="saveLesson" @add-test="addTest")
+                base-input(alternative="" label="Уроки и тесты" v-if="isReady")
+                  lessons.mt-2(:lessons="[...lessons, ...tests]" @delete-lesson="deleteLesson" @delete-test="deleteTest" @lesson-updated="updateLesson" @lesson-saved="saveLesson" @add-test="addTest")
             .row.mb-5(v-if="isError")
               .col-lg-12.d-flex.align-items-center
                 span.text-danger(v-html="errors")
@@ -92,11 +93,12 @@
 <script>
 import API from "@/API";
 import BaseDropdown from "@/components/BaseDropdown";
+import Loader from "@/components/Loader/loader";
 import Lessons from "@/components/lessons/lessons";
 
 export default {
   name: "edit-course",
-  components: { Lessons, BaseDropdown },
+  components: { Lessons, BaseDropdown, Loader },
   data() {
     return {
       api: API.instance,
@@ -136,6 +138,7 @@ export default {
         english: "Английский язык",
       },
       lessons: [],
+      tests: [],
     };
   },
   computed: {
@@ -201,6 +204,7 @@ export default {
     async getCourse() {
       if (this.courseId) {
         await this.api._get(`/courses/${this.courseId}`).then((r) => {
+          this.isReady = true;
           const course = r.data;
           this.name = course.name;
           this.slang_name = course.slang_name;

@@ -1,5 +1,6 @@
 <template lang="pug">
-.container-fluid
+Loader(v-if="!isReady")
+.container-fluid(v-if="isReady")
   .row
     .col
       card.shadow.mt-5
@@ -28,16 +29,19 @@
 
 <script>
 import API from "@/API";
+import Loader from "@/components/Loader/loader";
 
 export default {
   name: "Shop",
+  components: { Loader },
   data() {
     return {
       api: API.instance,
       products: [],
       productToDelete: {
         name: ""
-      }
+      },
+      isReady: false
     };
   },
   created() {
@@ -46,6 +50,7 @@ export default {
   methods: {
     async getProducts() {
       await this.api._get("/shop").then((r) => {
+        this.isReady = true;
         this.products.push(...r.data);
       });
     },

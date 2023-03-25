@@ -18,6 +18,9 @@ import Settings from "@/views/Settings/Settings";
 import Icons from "@/views/Icons";
 import Shop from "@/views/Shop/Shop";
 import EditProduct from "@/views/Shop/Edit-product";
+import EditSettings from "@/views/Settings/Edit-settings";
+import Promos from "@/views/Promos/Promos";
+import EditPromos from "@/views/Promos/Edit-Promo";
 
 const routes = [
   {
@@ -87,6 +90,26 @@ const routes = [
         path: "/settings",
         name: "settings",
         components: { default: Settings },
+      },
+      {
+        path: "/promos",
+        name: "promos",
+        components: { default: Promos },
+      },
+      {
+        path: "/promos/:id",
+        name: "edit-promos",
+        components: { default: EditPromos },
+      },
+            {
+        path: "/promos/:id",
+        name: "edit-promos",
+        components: { default: EditPromos },
+      },
+      {
+        path: "/settings/:id",
+        name: "edit-settings",
+        components: { default: EditSettings },
       },
       {
         path: "/icons",

@@ -1,5 +1,6 @@
 <template lang="pug">
-.container-fluid
+loader(v-if="!isReady")
+.container-fluid(v-if="isReady")
   .row
     .col
       card.shadow.mt-5
@@ -24,17 +25,19 @@
 <script>
 import API from "@/API";
 import BasePagination from "@/components/BasePagination";
+import Loader from "@/components/Loader/loader";
 
 export default {
   name: "Users",
-  components: { BasePagination },
+  components: { BasePagination, Loader },
   data() {
     return {
       api: API.instance,
       users: [],
       page: 1,
       usersPerPage: 10,
-      count: 0
+      count: 0,
+      isReady: false
     };
   },
   created() {
@@ -46,6 +49,7 @@ export default {
         page: page,
         perPage: this.usersPerPage,
       }).then((r) => {
+        this.isReady = true;
         this.users = r.data.users;
         this.count = r.data.count;
         this.page = page;

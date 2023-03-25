@@ -1,5 +1,6 @@
 <template lang="pug">
-.container-fluid
+loader(v-if="!isReady")
+.container-fluid(v-if="isReady")
   .row
     .col
       card.shadow.mt-5
@@ -28,16 +29,19 @@
 
 <script>
 import API from "@/API";
+import Loader from "@/components/Loader/loader";
 
 export default {
   name: "Tests",
+  components: { Loader },
   data() {
     return {
       api: API.instance,
       tests: [],
       testToDelete: {
         name: ""
-      }
+      },
+      isReady: false,
     };
   },
   created() {
@@ -46,6 +50,7 @@ export default {
   methods: {
     async getTests() {
       await this.api._get("/tests").then((r) => {
+        this.isReady = true;
         this.tests.push(...r.data);
       });
     },

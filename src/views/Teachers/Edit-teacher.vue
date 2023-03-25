@@ -352,6 +352,7 @@ export default {
     changeTeacherPhotos(p) {
       const photos = Object.assign({}, p);
       this.photos = Object.values(photos).map((item) => item.id);
+      console.log(this.photos);
     },
     changeTeacherVideoPreview(p) {
       const previews = Object.assign({}, p);

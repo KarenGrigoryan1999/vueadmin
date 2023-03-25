@@ -27,8 +27,25 @@
       .lesson-form__add-answers(@click="withAnswers = !withAnswers") {{ addAnswersText }}   
 
   .row
+    .col-lg-12
+      base-input(alternative="" label="Баллов за вопрос" v-model="cost" type='number')
+
+  .row
     .col-lg-12.d-flex.justify-content-center.mt-5(v-if="isError")
       .text-danger(v-html="errors")
+
+  .row
+   .col-lg-12 
+    base-input(alternative="" label="Картинки для теста, до 4 шт.")
+      files-uploader(
+       :files="photos"
+       type="images"
+       placeholder="Выбрать фотографии"
+       :limit="4"
+       catalog="question-photos"
+       @change-files="changeTestPhotos"
+     )
+
 
   .row
     .col-lg-12.d-flex.justify-content-center.mt-5
@@ -65,9 +82,11 @@ export default {
       answer_2: "",
       answer_3: "",
       answer_4: "",
+      cost: 1,
       questionId: 0,
       isError: false,
       errors: "",
+      photos: "",
     };
   },
   computed: {
@@ -84,14 +103,21 @@ export default {
       answer_2: state.withAnswers ? state.answer_2 : "",
       answer_3: state.withAnswers ? state.answer_3 : "",
       answer_4: state.withAnswers ? state.answer_4 : "",
+      cost: state.cost,
+      photos: state.photos,
     }),
   },
   created() {
     this.applyInitQuestion();
+    this.photos = this.initQuestion.photos;
   },
   methods: {
     async saveData() {
       await this.saveQuestion();
+    },
+    changeTestPhotos(p) {
+      const photos = Object.assign({}, p);
+      this.photos = Object.values(photos).map((item) => item.id);
     },
     async saveQuestion() {
       console.log(this.questionId);
@@ -132,6 +158,7 @@ export default {
         this.answer_2 = this.initQuestion?.answer_2;
         this.answer_3 = this.initQuestion?.answer_3;
         this.answer_4 = this.initQuestion?.answer_4;
+        this.cost = this.initQuestion?.cost;
         this.correctAnswer = this.initQuestion?.correct_answer;
 
         if (this.initQuestion?.type === "much") {

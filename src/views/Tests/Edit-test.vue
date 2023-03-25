@@ -1,5 +1,6 @@
 <template lang="pug">
-.container-fluid.pt-5
+loader(v-if="!isReady")
+.container-fluid.pt-5(v-if="isReady")
   .row
     .col-8.el-col-offset-4
       card.shadow
@@ -68,6 +69,7 @@ import Lessons from "@/components/lessons/lessons";
 import BaseInput from "@/components/BaseInput";
 import Modal from "@/components/Modal";
 import QuestionModal from "@/components/question-modal/question-modal";
+import Loader from "@/components/Loader/loader";
 import draggable from "vuedraggable";
 
 export default {
@@ -78,6 +80,7 @@ export default {
     BaseInput,
     Lessons,
     BaseDropdown,
+    Loader,
     draggable,
   },
   data() {

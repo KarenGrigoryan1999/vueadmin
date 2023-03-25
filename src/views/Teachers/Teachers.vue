@@ -1,5 +1,6 @@
 <template lang="pug">
-.container-fluid
+loader(v-if="!isReady")
+.container-fluid(v-if="isReady")
   .row
     .col
       card.shadow.mt-5
@@ -36,10 +37,11 @@
 <script>
 import API from "@/API";
 import BaseDropdown from "@/components/BaseDropdown";
+import Loader from "@/components/Loader/loader";
 
 export default {
   name: "Teachers",
-  components: { BaseDropdown },
+  components: { BaseDropdown, Loader },
   data() {
     return {
       api: API.instance,
@@ -48,6 +50,7 @@ export default {
         name: "",
         last_name: "",
       },
+      isReady: false
     };
   },
   created() {
@@ -56,6 +59,7 @@ export default {
   methods: {
     async getTeachers() {
       await this.api._get("/teachers").then((r) => {
+        this.isReady = true;
         this.teachers.push(...r.data);
       });
     },

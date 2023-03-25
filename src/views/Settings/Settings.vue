@@ -1,5 +1,6 @@
 <template lang="pug">
-.container-fluid.pt-5
+loader(v-if="!isReady")
+.container-fluid.pt-5(v-if="isReady")
   .row
     .col-8.el-col-offset-4
       card.shadow
@@ -41,7 +42,7 @@
               .col-lg-12.d-flex.align-items-center
                 base-button(@click="save") Сохранить
                 .text-success.ml-3(v-if="isSaved") Настройки сохранены
-      card.shadow
+      card.shadow.mt-5
         div
             .bg-white.border-0
               .row.align-items-center
@@ -51,7 +52,7 @@
                     base-input
                       textarea.form-control.form-control-alternative(rows="2" v-model="teacherSection.boysSpotText")
                     base-input(label="Заголовок кнопки" v-model="teacherSection.boysSpotButtonTitle")
-      card.shadow
+      card.shadow.mt-5
         div
             .bg-white.border-0
               .row.align-items-center
@@ -73,15 +74,41 @@
                     .col-lg-12.d-flex.align-items-center
                       base-button(@click="mainPageInfoSave") Сохранить
                       .text-success.ml-3(v-if="isSaved") Настройки сохранены
+                      .container-fluid(v-if="isReady")
+      .row
+        .col
+          card.shadow.mt-5
+            template(v-slot:header)
+              .d-flex.justify-content-between
+                b Блок "Этапы обучения"
+                base-button(size="sm" @click="$router.push('/settings/new')") Добавить
+            .d-flex.flex-column
+              .d-flex.justify-content-between.table-item(v-for="stage in stages" :key="stage.id")
+
+                .d-flex.align-items-center.w-50
+                  .name.mb-0 {{ stage.title }}
+
+                .d-flex.justify-content-end.align-items-center.w-25
+                  base-dropdown(position="right")
+                    template(v-slot:title)
+                      .btn.btn-sm.btn-icon-only.text-light.d-flex.justify-content-center.align-items-center(role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true")
+                        i.fa.fa-ellipsis-v
+                    a(href="#" @click="$router.push(`/settings/${stage.id}`)").dropdown-item Редактировать
+                    a(href="#" @click="stageToDelete = stage").dropdown-item.text-danger Удалить
+  modal(:show="stageToDelete.id") Вы действительно хотите удалить стадию "{{ stageToDelete.title }}"
+    template(v-slot:footer)
+      base-button(@click="stageToDelete = false") Отмена
+      base-button(@click="deleteStage") Удалить  
 </template>
 
 <script>
 import API from "@/API";
 import BaseButton from "@/components/BaseButton";
+import Loader from "@/components/Loader/loader";
 
 export default {
   name: "Settings",
-  components: { BaseButton },
+  components: { BaseButton, Loader },
   data() {
     return {
       api: API.instance,
@@ -95,6 +122,9 @@ export default {
       whatsApp: "",
       rewardCount: "",
       endDate: "",
+      stageToDelete: {
+        title: ""
+      },
       availableXFields: [
         "phone",
         "email",
@@ -119,19 +149,27 @@ export default {
         crimsonSpotTitle: "",
         crimsonSpotText: ""
       },
-      isSaved: false
+      isSaved: false,
+      isReady: false,
+      stages: [],
     };
   },
   created() {
-    this.getXFields();
     this.getMainPageFields();
   },
   methods: {
     async getXFields() {
       await this.api._get("/xfields").then((r) => {
+        this.isReady = true;
         r.data.forEach(x => {
           this[x.code] = x.value;
         })
+      });
+    },
+    async getStages() {
+      await this.api._get("/learn-stages").then((r) => {
+        this.isReady = true;
+        this.stages = r.data;
       });
     },
     async getMainPageFields() {
@@ -140,6 +178,9 @@ export default {
         console.log(id, updatedAt, createdAt, rest);
         this.teacherSection = rest;
       });
+
+      this.getXFields();
+      this.getStages();
     },
     async save() {
       this.availableXFields.forEach((x) => {
@@ -153,9 +194,16 @@ export default {
     },
     async mainPageInfoSave() {
       this.api._put("/main-page-fields", this.teacherSection);
-      console.log(this.teacherSection);
 
       this.isSaved = true;
+    },
+    async deleteStage() {
+      await this.api._delete(`/learn-stages/${this.stageToDelete.id}`).then((r) => {
+        if (r.data.deleted) {
+          this.stages.splice(this.stages.indexOf(this.stageToDelete), 1);
+          this.stageToDelete = {};
+        }
+      });
     }
   }
 };

@@ -45,6 +45,14 @@
 
         <sidebar-item
           :link="{
+            name: 'Промокоды',
+            icon: 'ni ni-tag text-warning',
+            path: '/promos',
+          }"
+        />
+
+        <sidebar-item
+          :link="{
             name: 'Магазин',
             icon: 'ni ni-shop text-warning',
             path: '/shop',

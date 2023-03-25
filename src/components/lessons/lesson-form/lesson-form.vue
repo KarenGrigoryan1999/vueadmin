@@ -5,8 +5,7 @@
       base-input(alternative="" label="Название урока" v-model="name")
   .row.mt-2.mb-4
     .col-lg-12
-      files-uploader(:files="video" type="video" placeholder="Выберите видео" :limit="1" catalog="videos" :private="true" @change-files="changeVideo" accept="video/*")
-
+      files-uploader(:files="video" type="video" placeholder="Выберите видео" :limit="1" catalog="lesson-videos" :private="false" @change-files="changeVideo" accept="video/*")
   .row
     .col-lg-12
       base-input(alternative="" label="Вопрос" v-model="question")
