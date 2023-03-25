@@ -1,8 +1,14 @@
+const fs = require('fs')
+
 module.exports = {
   devServer: {
-    host: "lvh.me",
-    port: 5000,
-    hot: true
+    https: {
+      key: fs.readFileSync('./certs/priv.pem'),
+      cert: fs.readFileSync('./certs/cert.pem'),
+      host: "lvh.me",
+      port: 5000,
+      hot: true,
+    },
   },
 
   chainWebpack: config => {
