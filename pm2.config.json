@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "name": "admin",
+      "script": "npm",
+      "args": "serve",
+      "instances": "max",
+      "exec_mode": "cluster"
+    }
+  ]
+}

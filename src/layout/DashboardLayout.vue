@@ -10,28 +10,28 @@
           :link="{
             name: 'Сводка',
             icon: 'ni ni-tv-2 text-primary',
-            path: '/dashboard',
+            path: '/admin/dashboard',
           }"
         />
         <sidebar-item
           :link="{
             name: 'Преподаватели',
             icon: 'ni ni-single-02 text-success',
-            path: '/teachers',
+            path: '/admin/teachers',
           }"
         />
         <sidebar-item
           :link="{
             name: 'Курсы',
             icon: 'ni ni-collection text-primary',
-            path: '/courses',
+            path: '/admin/courses',
           }"
         />
         <sidebar-item
           :link="{
             name: 'Тесты',
             icon: 'ni ni-align-left-2 text-warning',
-            path: '/tests',
+            path: '/admin/tests',
           }"
         />
 
@@ -39,7 +39,7 @@
           :link="{
             name: 'Пользователи',
             icon: 'ni ni-hat-3 text-danger',
-            path: '/users',
+            path: '/admin/users',
           }"
         />
 
@@ -47,7 +47,7 @@
           :link="{
             name: 'Промокоды',
             icon: 'ni ni-tag text-warning',
-            path: '/promos',
+            path: '/admin/promos',
           }"
         />
 
@@ -55,7 +55,7 @@
           :link="{
             name: 'Заказы',
             icon: 'ni ni-send text-warning',
-            path: '/orders',
+            path: '/admin/orders',
           }"
         />
 
@@ -63,7 +63,7 @@
           :link="{
             name: 'Магазин',
             icon: 'ni ni-shop text-warning',
-            path: '/shop',
+            path: '/admin/shop',
           }"
         />
 
@@ -71,7 +71,7 @@
           :link="{
             name: 'Настройки сайта',
             icon: 'ni ni-ruler-pencil text-success',
-            path: '/settings',
+            path: '/admin/settings',
           }"
         />
       </template>
