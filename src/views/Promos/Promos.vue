@@ -22,7 +22,7 @@ loader(v-if="!isReady")
                             i.fa.fa-ellipsis-v
                     a(href="#" @click="$router.push(`/promos/${promo.id}`)").dropdown-item Редактировать
                     a(href="#" @click="promoToDelete = promo").dropdown-item.text-danger Удалить
-    modal(:show="promoToDelete.id") Вы действительно хотите удалить преподавателя "{{ promoToDelete.name }}"
+    modal(:show="promoToDelete.id") Вы действительно хотите удалить промокод "{{ promoToDelete.name }}"
         template(v-slot:footer)
             base-button(@click="promoToDelete = false") Отмена
             base-button(@click="deletePromo") Удалить

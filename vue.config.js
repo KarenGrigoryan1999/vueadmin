@@ -1,13 +1,6 @@
 const fs = require('fs')
 
 module.exports = {
-  devServer: {
-    https: {
-      key: fs.readFileSync('./certs/priv.pem'),
-      cert: fs.readFileSync('./certs/cert.pem'),
-      hot: true,
-    },
-  },
 
   chainWebpack: config => {
     config.module
