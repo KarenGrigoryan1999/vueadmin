@@ -16,7 +16,7 @@ class API {
       (error) => {
         const { status } = error.response;
         if (status === 401) {
-          router.push("/login");
+          router.push("/admin/login");
         }
         throw error;
       }

@@ -103,11 +103,11 @@ export default {
   },
   async created() {
     if (!localStorage.token) {
-      await this.$router.push("/login");
+      await this.$router.push("/admin/login");
       return;
     }
     await this.api.checkToken().catch(() => {
-      this.$router.push("/login");
+      this.$router.push("/admin/login");
     });
   },
 };
