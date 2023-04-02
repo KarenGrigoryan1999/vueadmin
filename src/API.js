@@ -8,7 +8,7 @@ class API {
     this.token = localStorage.token;
 
     this.axios = axios.create({
-      baseURL: process.env.VUE_APP_API_LOCAL_URL
+      baseURL: 'https://217.18.63.132/api'
     });
 
     this.axios.interceptors.response.use(
