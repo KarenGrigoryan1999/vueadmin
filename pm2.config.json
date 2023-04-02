@@ -3,7 +3,7 @@
     {
       "name": "admin",
       "script": "npm",
-      "args": "run serve",
+      "args": "serve",
       "instances": "max",
       "exec_mode": "cluster"
     }
