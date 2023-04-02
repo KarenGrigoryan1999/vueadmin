@@ -2,10 +2,8 @@
   "apps": [
     {
       "name": "admin",
-      "script": "npm",
-      "args": "run serve",
-      "instances": "max",
-      "exec_mode": "cluster"
+      "script": "./node_modules/@vue/cli-service/bin/vue-cli-service.js",
+      "args": "serve"
     }
   ]
 }
