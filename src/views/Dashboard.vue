@@ -3,46 +3,24 @@
     <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
       <div class="row">
         <div class="col-xl-3 col-lg-6">
-          <stats-card title="Посетителей" type="gradient-red" sub-title="232" icon="ni ni-active-40" class="mb-4 mb-xl-0">
+          <stats-card title="Посетителей" type="gradient-red" :sub-title="totalUsersForMounth" icon="ni ni-active-40" class="mb-4 mb-xl-0">
             <template v-slot:footer>
-              <span class="text-success mr-2">
-                <i class="fa fa-arrow-up"></i>
-                3.48%
-              </span>
-              <span class="text-nowrap">К вчерашнему дню</span>
+              <span class="text-nowrap">Просмотров курсов за месяц</span>
             </template>
           </stats-card>
         </div>
         <div class="col-xl-3 col-lg-6">
-          <stats-card title="Всего посетителей" type="gradient-orange" sub-title="2356" icon="ni ni-chart-pie-35" class="mb-4 mb-xl-0">
-            <template v-slot:footer>
-              <span class="text-success mr-2">
-                <i class="fa fa-arrow-up"></i>
-                12.18%
-              </span>
-              <span class="text-nowrap">К пред. месяцу</span>
-            </template>
+          <stats-card title="Всего посетителей" type="gradient-orange" :sub-title="totalUsers" icon="ni ni-chart-pie-35" class="mb-4 mb-xl-0">
           </stats-card>
         </div>
         <div class="col-xl-3 col-lg-6">
-          <stats-card title="Продажи" type="gradient-green" sub-title="52" icon="ni ni-money-coins" class="mb-4 mb-xl-0">
-            <template v-slot:footer>
-              <span class="text-danger mr-2">
-                <i class="fa fa-arrow-down"></i>
-                5.72%
-              </span>
-              <span class="text-nowrap">К пред. месяцу</span>
-            </template>
+          <stats-card title="Продажи" type="gradient-green" :sub-title="totalSalesForMounth" icon="ni ni-money-coins" class="mb-4 mb-xl-0">
           </stats-card>
         </div>
         <div class="col-xl-3 col-lg-6">
-          <stats-card title="Средний балл" type="gradient-info" sub-title="48 баллов" icon="ni ni-chart-bar-32" class="mb-4 mb-xl-0">
+          <stats-card title="Всего продажи" type="gradient-info" :sub-title="totalSales" icon="ni ni-chart-bar-32" class="mb-4 mb-xl-0">
             <template v-slot:footer>
-              <span class="text-success mr-2">
-                <i class="fa fa-arrow-up"></i>
-                56%
-              </span>
-              <span class="text-nowrap">К пред. месяцу</span>
+              <span class="text-nowrap">Количество продаж за месяц</span>
             </template>
           </stats-card>
         </div>
@@ -50,64 +28,10 @@
     </base-header>
 
     <div class="container-fluid mt--7">
-      <!--Charts-->
-      <div class="row">
-        <div class="col-xl-8 mb-5 mb-xl-0">
-          <card type="default" header-classes="bg-transparent">
-            <template v-slot:header>
-              <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-light text-uppercase ls-1 mb-1">Обзор</h6>
-                  <h5 class="h3 text-white mb-0">Среднее количество продаж</h5>
-                </div>
-                <div class="col">
-                  <ul class="nav nav-pills justify-content-end">
-                    <li class="nav-item mr-2 mr-md-0">
-                      <a class="nav-link py-2 px-3" href="#" :class="{ active: bigLineChart.activeIndex === 0 }" @click.prevent="initBigChart(0)">
-                        <span class="d-none d-md-block">Месяц</span>
-                        <span class="d-md-none">М</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link py-2 px-3" href="#" :class="{ active: bigLineChart.activeIndex === 1 }" @click.prevent="initBigChart(1)">
-                        <span class="d-none d-md-block">Неделя</span>
-                        <span class="d-md-none">Н</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </template>
-            <div class="chart-area">
-              <canvas :height="350" :id="salesChartID"></canvas>
-            </div>
-          </card>
-        </div>
-
-        <div class="col-xl-4">
-          <card header-classes="bg-transparent">
-            <template v-slot:header>
-              <div class="row align-items-center">
-                <div class="col">
-                  <h5 class="h3 mb-0">Всего продаж</h5>
-                </div>
-              </div>
-            </template>
-            <div class="chart-area">
-              <canvas :height="350" :id="ordersChartID"></canvas>
-            </div>
-          </card>
-        </div>
-      </div>
-      <!-- End charts-->
-
       <!--Tables-->
       <div class="row mt-5">
-        <div class="col-xl-8 mb-5 mb-xl-0">
-          <page-visits-table></page-visits-table>
-        </div>
-        <div class="col-xl-4">
-          <social-traffic-table></social-traffic-table>
+        <div class="col-xl-12 mb-12 mb-xl-12">
+          <page-visits-table :statistic="statistic?.mounthStatistic"></page-visits-table>
         </div>
       </div>
       <!--End tables-->
@@ -115,179 +39,38 @@
   </div>
 </template>
 <script>
-// Charts
-import { ordersChart } from "@/components/Charts/Chart";
-import Chart from "chart.js";
+import API from "@/API";
 
 import PageVisitsTable from "./Dashboard/PageVisitsTable";
-import SocialTrafficTable from "./Dashboard/SocialTrafficTable";
-
-let chart;
 
 export default {
   components: {
     PageVisitsTable,
-    SocialTrafficTable
   },
   data() {
     return {
-      salesChartID: "salesChart",
-      ordersChartID: "ordersChart",
-      bigLineChart: {
-        allData: [
-          [0, 20, 10, 30, 15, 40, 20, 60, 60],
-          [0, 20, 5, 25, 10, 30, 15, 40, 40]
-        ],
-        activeIndex: 0
-      }
+      api: API.instance,
+      statistic: null,
     };
   },
+  computed: {
+    totalUsers: (state) => (state.statistic ? state.statistic.totalUsers : 0).toString(),
+    totalSales: (state) => (state.statistic ? state.statistic.totalSales : 0).toString(),
+    totalUsersForMounth: (state) => (state.statistic ? state.statistic.mounthStatistic.reduce((acc, element) => element.users + acc, 0) : 0).toString(),
+    totalSalesForMounth: (state) => (state.statistic ? state.statistic.mounthStatistic.reduce((acc, element) => element.sales + acc, 0) : 0).toString(),
+  },
   methods: {
-    initBigChart(index) {
-      chart.destroy();
-      chart = new Chart(
-        document.getElementById(this.salesChartID).getContext("2d"),
-        {
-          type: "line",
-          data: {
-            labels: ["Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-            datasets: [
-              {
-                label: "Продажи",
-                tension: 0.4,
-                borderWidth: 4,
-                borderColor: "#5e72e4",
-                pointRadius: 0,
-                backgroundColor: "transparent",
-                data: this.bigLineChart.allData[index]
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              display: false
-            },
-            tooltips: {
-              enabled: true,
-              mode: "index",
-              intersect: false
-            },
-            scales: {
-              yAxes: [
-                {
-                  barPercentage: 1.6,
-                  gridLines: {
-                    drawBorder: false,
-                    color: "rgba(29,140,248,0.0)",
-                    zeroLineColor: "transparent"
-                  },
-                  ticks: {
-                    padding: 0,
-                    fontColor: "#8898aa",
-                    fontSize: 13,
-                    fontFamily: "Open Sans"
-                  }
-                }
-              ],
-              xAxes: [
-                {
-                  barPercentage: 1.6,
-                  gridLines: {
-                    drawBorder: false,
-                    color: "rgba(29,140,248,0.0)",
-                    zeroLineColor: "transparent"
-                  },
-                  ticks: {
-                    padding: 10,
-                    fontColor: "#8898aa",
-                    fontSize: 13,
-                    fontFamily: "Open Sans"
-                  }
-                }
-              ]
-            },
-            layout: {
-              padding: 0
-            }
-          }
-        }
-      );
-      this.bigLineChart.activeIndex = index;
-    }
+    getStatistic() {
+      this.api._get('/statistic').then((r) => {
+        this.statistic = r.data;
+      });
+    },
+  },
+  async created() {
+    await this.getStatistic();
   },
   mounted() {
-    chart = new Chart(
-      document.getElementById(this.salesChartID).getContext("2d"),
-      {
-        type: "line",
-        data: {
-          labels: ["Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-          datasets: [
-            {
-              label: "Продажи",
-              tension: 0.4,
-              borderWidth: 4,
-              borderColor: "#5e72e4",
-              pointRadius: 0,
-              backgroundColor: "transparent",
-              data: this.bigLineChart.allData[1]
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-          tooltips: {
-            enabled: true,
-            mode: "index",
-            intersect: false
-          },
-          scales: {
-            yAxes: [
-              {
-                barPercentage: 1.6,
-                gridLines: {
-                  drawBorder: false,
-                  color: "rgba(29,140,248,0.0)",
-                  zeroLineColor: "transparent"
-                },
-                ticks: {
-                  padding: 0,
-                  fontColor: "#8898aa",
-                  fontSize: 13,
-                  fontFamily: "Open Sans"
-                }
-              }
-            ],
-            xAxes: [
-              {
-                barPercentage: 1.6,
-                gridLines: {
-                  drawBorder: false,
-                  color: "rgba(29,140,248,0.0)",
-                  zeroLineColor: "transparent"
-                },
-                ticks: {
-                  padding: 10,
-                  fontColor: "#8898aa",
-                  fontSize: 13,
-                  fontFamily: "Open Sans"
-                }
-              }
-            ]
-          },
-          layout: {
-            padding: 0
-          }
-        }
-      }
-    );
-    ordersChart.createChart(this.ordersChartID);
+    console.log(this.statistic);
   }
 };
 </script>

@@ -5,14 +5,10 @@
         <div class="col">
           <h3 class="mb-0">Популярные курсы</h3>
         </div>
-        <div class="col text-right">
-          <a href="#!" class="btn btn-sm btn-primary">Смотреть все</a>
-        </div>
       </div>
     </div>
-
-    <div class="table-responsive">
-      <base-table thead-classes="thead-light" :data="tableData">
+    <div class="table-responsive" v-if="statistic.length !== 0">
+      <base-table thead-classes="thead-light" :data="statistic">
         <template v-slot:columns>
           <th>Курс</th>
           <th>Просмотров</th>
@@ -21,13 +17,13 @@
 
         <template v-slot:default="row">
           <th scope="row">
-            {{ row.item.page }}
+            {{ row.course.at(0).name}}
           </th>
           <td>
-            {{ row.item.visitors }}
+            {{ row.users + 1 }}
           </td>
           <td>
-            {{ row.item.unique }}
+            {{ row.sales + 2 }}
           </td>
         </template>
       </base-table>
@@ -37,6 +33,18 @@
 <script>
 export default {
   name: "page-visits-table",
+  props: {
+    statistic: {
+      type: Array,
+      default: () => [],
+    }
+  },
+  mounted() {
+
+  },
+  computed: {
+    
+  },
   data() {
     return {
       tableData: [
