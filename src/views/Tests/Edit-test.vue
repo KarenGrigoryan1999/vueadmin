@@ -146,13 +146,14 @@ export default {
         await this.$router.replace("/tests");
       }
     },
-    async saveTest() {
+    saveTest() {
       this.isError = false;
       if (this.testId === "new") {
-        await this.api
+        this.api
           ._post(`/tests/`, this.saveData)
           .then((r) => {
             if (r.data.id) {
+              this.$router.replace(`/tests/${r.data.id}`);
               this.isSaved = true;
               setTimeout(() => {
                 this.isSaved = false;
@@ -168,7 +169,7 @@ export default {
         return;
       }
 
-      await this.api
+      this.api
         ._put(`/tests/`, this.saveData)
         .then((r) => {
           if (r.data.success) {

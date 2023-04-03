@@ -44,7 +44,25 @@
   }
 
   &__item-ctrl {
-    flex: none;
+    display: flex;
+  }
+
+  &__edit::before {
+    content: '';
+    background: url('../../assets/icons/edit.svg');
+    display: block;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+  }
+
+  &__delete::before {
+    content: '';
+    display: block;
+    background: url('../../assets/icons/remove.svg');
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
   }
 
   &__add-btn {

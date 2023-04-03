@@ -8,12 +8,8 @@
         ._item-name {{ element.name }}
           sup._item-name-type {{ element.CoursesLessons?.id ? "Урок" : "Тест" }}
         ._item-ctrl
-          base-dropdown.dropdown(position="right")
-            template(v-slot:title)
-              a.btn.btn-sm.btn-icon-only.text-light(role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-                i.fas.fa-ellipsis-v
-            button.dropdown-item(@click.prevent="lessonToEdit = element" v-if="element.CoursesLessons?.id") Редактировать    
-            button.dropdown-item(@click.prevent="deleteItem(element)") Удалить
+            button.dropdown-item._edit(@click.prevent="lessonToEdit = element" v-if="element.CoursesLessons?.id")    
+            button.dropdown-item._delete(@click.prevent="deleteItem(element)")
   modal(:show="isAddLesson || !!lessonToEdit.id")
     lesson-form(:initLesson="lessonToEdit" v-if="isAddLesson || !!lessonToEdit.id" :position="lessons.length + 1" @lesson-saved="addLesson" @lesson-updated="updateLesson")
     template(v-slot:footer)

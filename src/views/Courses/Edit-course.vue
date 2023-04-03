@@ -255,6 +255,7 @@ export default {
           ._post(`/courses/`, this.saveData)
           .then((r) => {
             if (r.data.id) {
+              this.$router.replace(`/courses/${r.data.id}`);
               this.isSaved = true;
               setTimeout(() => {
                 this.isSaved = false;

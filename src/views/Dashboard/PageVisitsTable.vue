@@ -3,7 +3,7 @@
     <div class="card-header border-0">
       <div class="row align-items-center">
         <div class="col">
-          <h3 class="mb-0">Популярные курсы</h3>
+          <h3 class="mb-0">{{ title }}</h3>
         </div>
       </div>
     </div>
@@ -17,13 +17,13 @@
 
         <template v-slot:default="row">
           <th scope="row">
-            {{ row.course.at(0).name}}
+            {{ row.item.course[0].name }}
           </th>
           <td>
-            {{ row.users + 1 }}
+            {{ row.item.users }}
           </td>
           <td>
-            {{ row.sales + 2 }}
+            {{ row.item.sales }}
           </td>
         </template>
       </base-table>
@@ -37,6 +37,10 @@ export default {
     statistic: {
       type: Array,
       default: () => [],
+    },
+    title: {
+      type: String,
+      default: ''
     }
   },
   mounted() {

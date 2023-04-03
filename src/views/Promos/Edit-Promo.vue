@@ -67,8 +67,8 @@ loader(v-if="!isReady")
         saveData: (state) => {
           const data = {
             name: state.name,
-            discount: state.discount,
-            type: state.type,
+            discount: parseInt(state.discount, 10),
+            type: parseInt(state.type, 10),
           };
     
           if (state.promoId > 0) {
@@ -94,8 +94,8 @@ loader(v-if="!isReady")
             await this.api._get(`/promo/${this.promoId}`).then((r) => {
               this.isReady = true;
               this.name = r.data.name;
-              this.discount = r.data.discount;
-              this.type = r.data.type;
+              this.discount = parseInt(r.data.discount, 10);
+              this.type = parseInt(r.data.type, 10);
 
     
               setTimeout(() => {

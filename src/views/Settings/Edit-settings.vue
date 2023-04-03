@@ -38,8 +38,8 @@ loader(v-if="!isReady")
                                         @change-files="changeStagePicture"
                                     )
                         div.row.mb-5(v-if="isError")
-                        div.col-lg-12.d-flex.align-items-center
-                            span.text-danger(v-html="errors")
+                          div.col-lg-12.d-flex.align-items-center
+                              span.text-danger(v-html="errors")
                         div.row
                         div.col-lg-12.d-flex.align-items-center
                             base-button(@click.native="saveSettings") Сохранить
@@ -95,6 +95,8 @@ loader(v-if="!isReady")
                 this.isError = true;
                 this.errors += "Выберите фотографию<br/>";
             }
+
+            if(this.errors) return;
 
             if (this.settingId === "new") {
                 await this.api
