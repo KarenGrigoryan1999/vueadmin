@@ -26,10 +26,10 @@ const GlobalComponents = {
       methods: {
         pathToServer(photo) {
           if(photo?.is_private) {
-            return `${process.env.VUE_APP_API_LOCAL_URL}/files/${photo.name}`
+            return `https://217.18.63.132/api/files/${photo.name}`
           }
           if (photo?.name !== undefined) {
-            return `${process.env.VUE_APP_API_LOCAL_URL}/${photo.catalog}/${photo.name}`;
+            return `https://217.18.63.132/api/${photo.catalog}/${photo.name}`;
           }
           return "@/assets/no-avatar.png";
         }
