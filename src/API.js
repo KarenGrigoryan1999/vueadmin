@@ -8,7 +8,7 @@ class API {
     this.token = localStorage.token;
 
     this.axios = axios.create({
-      baseURL: 'https://217.18.63.132/api'
+      baseURL: 'https://badteachers.ru/api'
     });
 
     this.axios.interceptors.response.use(

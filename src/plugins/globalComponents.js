@@ -26,10 +26,10 @@ const GlobalComponents = {
       methods: {
         pathToServer(photo) {
           if(photo?.is_private) {
-            return `https://217.18.63.132/api/files/${photo.name}`
+            return `https://badteachers.ru/api/files/${photo.name}`
           }
           if (photo?.name !== undefined) {
-            return `https://217.18.63.132/api/${photo.catalog}/${photo.name}`;
+            return `https://badteachers.ru/api/${photo.catalog}/${photo.name}`;
           }
           return "@/assets/no-avatar.png";
         }
