@@ -26,106 +26,106 @@ import EditPromos from "@/views/Promos/Edit-Promo";
 const routes = [
   {
     path: "",
-    redirect: "/dashboard",
+    redirect: "/admin/dashboard",
     component: DashboardLayout,
     meta: {
       onlyAdmin: true,
     },
     children: [
       {
-        path: "/dashboard",
+        path: "/admin/dashboard",
         name: "dashboard",
         components: { default: Dashboard },
       },
       {
-        path: "/teachers",
+        path: "/admin/teachers",
         name: "teachers",
         components: { default: Teachers },
       },
       {
-        path: "/teachers/:id",
+        path: "/admin/teachers/:id",
         name: "edit-teacher",
         components: { default: EditTeacher },
       },
       {
-        path: "/courses",
+        path: "/admin/courses",
         name: "courses",
         components: { default: Courses },
       },
       {
-        path: "/courses/:id",
+        path: "/admin/courses/:id",
         name: "edit-course",
         components: { default: EditCourse },
       },
       {
-        path: "/tests",
+        path: "/admin/tests",
         name: "tests",
         components: { default: Tests },
       },
       {
-        path: "/tests/:id",
+        path: "/admin/tests/:id",
         name: "edit-test",
         components: { default: EditTest },
       },
       {
-        path: "/users",
+        path: "/admin/users",
         name: "users",
         components: { default: Users },
       },
       {
-        path: "/users/:id",
+        path: "/admin/users/:id",
         name: "edit-user",
         components: { default: EditUser },
       },
       {
-        path: "/shop",
+        path: "/admin/shop",
         name: "shop",
         components: { default: Shop },
       },
       {
-        path: "/shop/:id",
+        path: "/admin/shop/:id",
         name: "edit-product",
         components: { default: EditProduct },
       },
       {
-        path: "/settings",
+        path: "/admin/settings",
         name: "settings",
         components: { default: Settings },
       },
       {
-        path: "/promos",
+        path: "/admin/promos",
         name: "promos",
         components: { default: Promos },
       },
       {
-        path: "/promos/:id",
+        path: "/admin/promos/:id",
         name: "edit-promos",
         components: { default: EditPromos },
       },
       {
-        path: "/orders",
+        path: "/admin/orders",
         name: "orders",
         components: { default: Gifts },
       },
       {
-        path: "/settings/:id",
+        path: "/admin/settings/:id",
         name: "edit-settings",
         components: { default: EditSettings },
       },
       {
-        path: "/icons",
+        path: "/admin/icons",
         name: "icons",
         components: { default: Icons },
       },
     ],
   },
   {
-    path: "/auth",
+    path: "/admin/auth",
     redirect: "login",
     component: AuthLayout,
     children: [
       {
-        path: "/login",
+        path: "/admin/login",
         name: "login",
         components: { default: Login },
         meta: {
