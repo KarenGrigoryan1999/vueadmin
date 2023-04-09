@@ -223,11 +223,31 @@ export default {
           checked: false,
         },
         {
+          name: "bubble-white",
+          checked: false,
+        },
+        {
           name: "with-balloon",
           checked: false,
         },
         {
+          name: "with-balloon-white",
+          checked: false,
+        },
+        {
+          name: "with-ballon-green",
+          checked: false,
+        },
+        {
           name: "car",
+          checked: false,
+        },
+        {
+          name: "car-green",
+          checked: false,
+        },
+        {
+          name: "car-orange",
           checked: false,
         },
       ],

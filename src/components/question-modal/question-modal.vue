@@ -120,7 +120,6 @@ export default {
       this.photos = Object.values(photos).map((item) => item.id);
     },
     async saveQuestion() {
-      console.log(this.questionId);
       if (this.questionId) {
         await this.api
           ._put("/questions", this.questionData)
