@@ -13,6 +13,8 @@ loader(v-if="!isReady")
           .pl-lg-4
             .row
               .col-12
+                base-input(label="Количество процентов" v-model="sale")
+              .col-12
                 base-input(label="Номер телефона" v-model="phone")
             .row
               .col-12
@@ -121,6 +123,7 @@ export default {
       telegram: "",
       whatsApp: "",
       rewardCount: "",
+      sale: 0,
       endDate: "",
       stageToDelete: {
         title: ""
@@ -134,7 +137,8 @@ export default {
         "telegram",
         "whatsApp",
         "rewardCount",
-        "endDate"
+        "endDate",
+        "sale"
       ],
       teacherSection: {
         boysSpotTitle: "",
@@ -147,7 +151,7 @@ export default {
         blueSpotTitle: "",
         blueSpotText: "",
         crimsonSpotTitle: "",
-        crimsonSpotText: ""
+        crimsonSpotText: "",
       },
       isSaved: false,
       isReady: false,
