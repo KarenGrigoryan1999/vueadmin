@@ -61,6 +61,14 @@
 
         <sidebar-item
           :link="{
+            name: 'Звонки',
+            icon: 'ni ni-support-16 text-warning',
+            path: '/calls',
+          }"
+        />
+
+        <sidebar-item
+          :link="{
             name: 'Магазин',
             icon: 'ni ni-shop text-warning',
             path: '/shop',

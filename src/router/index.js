@@ -21,6 +21,7 @@ import EditProduct from "@/views/Shop/Edit-product";
 import EditSettings from "@/views/Settings/Edit-settings";
 import Promos from "@/views/Promos/Promos";
 import Gifts from "@/views/Gifts/Gifts";
+import Calls from "@/views/Calls/Calls";
 import EditPromos from "@/views/Promos/Edit-Promo";
 
 const routes = [
@@ -106,6 +107,11 @@ const routes = [
         path: "/orders",
         name: "orders",
         components: { default: Gifts },
+      },
+      {
+        path: "/calls",
+        name: "calls",
+        components: { default: Calls },
       },
       {
         path: "/settings/:id",
