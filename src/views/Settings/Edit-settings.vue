@@ -160,7 +160,7 @@ loader(v-if="!isReady")
         saveData: (state) => {
             const data = {
                 title: state.stageTitle,
-                smileType: state.smileType,
+                smileType: +state.smileType,
                 photo: state.photos[0].id,
             };
 
