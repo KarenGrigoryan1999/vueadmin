@@ -25,6 +25,9 @@
             .row
               .col-12
                 base-input(label="Телефон" placeholder="" v-model="phone")
+            .row
+              .col-12
+                base-input(label="Баланс" placeholder="" v-model="balance")
             //.row.mb-3
             //  .col-12
             //    base-checkbox(:checked="phone_confirmed") Телефон подтверждён
@@ -66,6 +69,7 @@ export default {
       email: "",
       email_confirmed: false,
       phone: "",
+      balance: 0,
       phone_confirmed: false,
       isSaved: false,
       isError: false,
@@ -81,6 +85,7 @@ export default {
       email: state.email,
       email_confirmed: state.email_confirmed,
       phone: state.phone,
+      balance: state.balance,
       phone_confirmed: state.phone_confirmed,
     }),
   },
@@ -92,12 +97,12 @@ export default {
       if (this.userId) {
         await this.api._get(`/users/${this.userId}`).then((r) => {
           const user = r.data;
-
           this.name = user.name;
           this.lastName = user.lastName;
           this.email = user.email;
           this.email_confirmed = user.email_confirmed;
           this.phone = user.phone;
+          this.balance = user.balance;
           this.phone_confirmed = user.phone_confirmed;
 
           setTimeout(() => {
@@ -115,7 +120,6 @@ export default {
           this.isSaved = false;
         }, 5000);
       }).catch(e => {
-        console.log();
         this.isError = true;
         this.errors = e.response.data.errors.map(error => error.error).join("<br/>");
       })
