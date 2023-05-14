@@ -54,6 +54,9 @@ loader(v-if="!isReady")
                     base-input
                       textarea.form-control.form-control-alternative(rows="2" v-model="teacherSection.boysSpotText")
                     base-input(label="Заголовок кнопки" v-model="teacherSection.boysSpotButtonTitle")
+                    base-input
+                      textarea.form-control.form-control-alternative(rows="2" v-model="teacherSection.boysSpotText")
+                    base-input(label="Ссылка на переход по нажатию" v-model="teacherSection.boysSpotButtonLink")
       card.shadow.mt-5
         div
             .bg-white.border-0
@@ -142,6 +145,7 @@ export default {
       ],
       teacherSection: {
         boysSpotTitle: "",
+        boysSpotButtonLink: "",
         boysSpotText: "",
         boysSpotButtonTitle: "",
         purpureSpotTitle: "",
