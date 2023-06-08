@@ -54,9 +54,13 @@ loader(v-if="!isReady")
                     base-input
                       textarea.form-control.form-control-alternative(rows="2" v-model="teacherSection.boysSpotText")
                     base-input(label="Заголовок кнопки" v-model="teacherSection.boysSpotButtonTitle")
-                    base-input
-                      textarea.form-control.form-control-alternative(rows="2" v-model="teacherSection.boysSpotText")
                     base-input(label="Ссылка на переход по нажатию" v-model="teacherSection.boysSpotButtonLink")
+                    base-input(label="Заголовок и текст (красное пятно)" v-model="teacherSection.boysRedSpotTitle")
+                    base-input
+                      textarea.form-control.form-control-alternative(rows="2" v-model="teacherSection.boysRedSpotText")
+                    base-input(label="Заголовок кнопки (красное пятно)" v-model="teacherSection.boysRedSpotButtonTitle")
+                    base-input(label="Ссылка на переход по нажатию (красное пятно)" v-model="teacherSection.boysRedSpotButtonLink")
+                    
       card.shadow.mt-5
         div
             .bg-white.border-0
@@ -148,6 +152,10 @@ export default {
         boysSpotButtonLink: "",
         boysSpotText: "",
         boysSpotButtonTitle: "",
+        boysRedSpotTitle: "",
+        boysRedSpotButtonLink: "",
+        boysRedSpotText: "",
+        boysRedSpotButtonTitle: "",
         purpureSpotTitle: "",
         purpureSpotText: "",
         turquoiseSpotTitle: "",
