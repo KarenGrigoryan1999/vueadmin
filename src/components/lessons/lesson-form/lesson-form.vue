@@ -27,15 +27,15 @@
     .row
       .col-lg-12
         base-input(alternative="" label="Вариант ответа №4" v-model="answer_4")
-    .row
-      .col-lg-12
-        label
-          input(type="checkbox" v-model="free")
-          p Отметить как бесплатный
   .row
     .col-lg-12
       .lesson-form__add-answers(@click="withAnswers = !withAnswers") {{ addAnswersText }}   
 
+  .row
+    .col-lg-12
+      label
+        input(type="checkbox" v-model="free")
+        p Отметить как бесплатный
   .row
     .col-lg-12.d-flex.justify-content-center.mt-5
       base-button.lesson-form__add-answers(@click="saveData") Сохранить урок       
