@@ -77,6 +77,14 @@
 
         <sidebar-item
           :link="{
+            name: 'Иллюстрации',
+            icon: 'ni ni-image text-primary',
+            path: '/illustrations',
+          }"
+        />
+
+        <sidebar-item
+          :link="{
             name: 'Настройки сайта',
             icon: 'ni ni-ruler-pencil text-success',
             path: '/settings',

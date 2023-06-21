@@ -23,6 +23,8 @@ import Promos from "@/views/Promos/Promos";
 import Gifts from "@/views/Gifts/Gifts";
 import Calls from "@/views/Calls/Calls";
 import EditPromos from "@/views/Promos/Edit-Promo";
+import Illustrations from "@/views/Illustrations/Illustrations"
+import EditIllustrations from "@/views/Illustrations/Edit-illustrations"
 
 const routes = [
   {
@@ -122,6 +124,16 @@ const routes = [
         path: "/icons",
         name: "icons",
         components: { default: Icons },
+      },
+      {
+        path: "/illustrations",
+        name: "illustrations",
+        components: { default: Illustrations },
+      },
+      {
+        path: "/illustrations/:id",
+        name: "edit-illustrations",
+        components: { default: EditIllustrations },
       },
     ],
   },

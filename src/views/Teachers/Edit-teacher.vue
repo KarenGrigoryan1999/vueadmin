@@ -305,11 +305,20 @@ export default {
           if (teacher.illustration_type) {
             this.illustration_type = teacher.illustration_type;
           }
-  
+          
           setTimeout(() => {
             this.isReady = true;
           }, 300);
         });
+        await this.api._get('/illustrations').then((r) => {
+            const illustrations = r.data;
+            this.types = illustrations.map(element => (
+              {
+                name: element.name,
+                checked: false,
+              }
+            ));
+        })
       } else {
         await this.$router.replace("/teachers");
       }
