@@ -119,7 +119,7 @@ export default {
         return this.api
           .axios({
             method: "POST",
-            url: "/files",
+            url: this.catalog === 'lesson-videos' ? '/files/lesson' : "/files",
             headers: {
               Authorization: `Bearer ${this.api.token}`,
             },
