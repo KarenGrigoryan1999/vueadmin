@@ -292,11 +292,13 @@ export default {
       const files = Object.assign({}, p);
       this.file = Object.values(files).map((item) => item.id);
     },
-    updateLesson(lesson) {
+    async updateLesson(lesson) {
       this.lessons.find((l) => l.id === lesson.id).name = lesson.name;
       this.lessons.find((l) => l.id === lesson.id).questionId =
         lesson.questionId;
       this.lessons.find((l) => l.id === lesson.id).position = lesson.position;
+      this.isReady = false;
+      await this.getCourse();
     },
     async saveLesson(lesson) {
       this.lessons.push({ ...lesson, CoursesLessons: { id: lesson.id } });
