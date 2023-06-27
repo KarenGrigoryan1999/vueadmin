@@ -298,8 +298,10 @@ export default {
         lesson.questionId;
       this.lessons.find((l) => l.id === lesson.id).position = lesson.position;
     },
-    saveLesson(lesson) {
+    async saveLesson(lesson) {
       this.lessons.push({ ...lesson, CoursesLessons: { id: lesson.id } });
+      this.isReady = false;
+      await this.getCourse();
     },
     addTest(test) {
       this.lessons.push({ ...test, CoursesTests: { id: test.id } });
