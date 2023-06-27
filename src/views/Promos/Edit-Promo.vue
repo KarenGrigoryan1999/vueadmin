@@ -78,7 +78,7 @@ loader(v-if="!isReady")
           return data;
         },
         title: (state) =>
-          state.promoId === "new" ? "Новый курс" : "Редактирование курса",
+          state.promoId === "new" ? "Новый курс" : "Редактирование промо",
       },
       async created() {
         if (this.promoId === "new") {
