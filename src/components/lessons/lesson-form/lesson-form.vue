@@ -27,11 +27,15 @@
     .row
       .col-lg-12
         base-input(alternative="" label="Вариант ответа №4" v-model="answer_4")
-
   .row
     .col-lg-12
       .lesson-form__add-answers(@click="withAnswers = !withAnswers") {{ addAnswersText }}   
 
+  .row
+    .col-lg-12
+      label
+        input(type="checkbox" v-model="free")
+        p Отметить как бесплатный
   .row
     .col-lg-12.d-flex.justify-content-center.mt-5
       base-button.lesson-form__add-answers(@click="saveData") Сохранить урок       
@@ -71,6 +75,7 @@ export default {
       answer_2: "",
       answer_3: "",
       answer_4: "",
+      free: false,
       questionId: 0
     };
   },
@@ -85,7 +90,8 @@ export default {
       video: state.video[0],
       questionId: state.questionId,
       position: state.initLesson.position ? state.initLesson.position : state.position,
-      courseId: state.$route.params.id
+      courseId: state.$route.params.id,
+      free: state.free,
     }),
     questionData: (state) => ({
       id: state.questionId,
@@ -95,7 +101,7 @@ export default {
       answer_1: state.answer_1,
       answer_2: state.answer_2,
       answer_3: state.answer_3,
-      answer_4: state.answer_4
+      answer_4: state.answer_4,
     })
   },
   created() {
@@ -136,6 +142,7 @@ export default {
         this.answer_2 = this.initLesson?.question?.answer_2;
         this.answer_3 = this.initLesson?.question?.answer_3;
         this.answer_4 = this.initLesson?.question?.answer_4;
+        this.free = this.initLesson.free;
         this.correctAnswer = this.initLesson?.question?.correct_answer;
 
         if (this.initLesson?.question?.type === "much") {
