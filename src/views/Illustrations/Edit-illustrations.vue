@@ -121,7 +121,7 @@ loader(v-if="!isReady")
               }
         
               await this.api
-                ._put(`/illustration/${this.illustrationId}`, this.saveData)
+                ._put(`/illustrations/${this.illustrationId}`, this.saveData)
                 .then((r) => {
                   if (r.data.success) {
                     this.isSaved = true;
