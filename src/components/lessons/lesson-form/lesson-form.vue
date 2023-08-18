@@ -27,6 +27,9 @@
     .row
       .col-lg-12
         base-input(alternative="" label="Вариант ответа №4" v-model="answer_4")
+    .row
+      .col-lg-12
+        base-input(alternative="" label="Вариант ответа №5" v-model="answer_5")
   .row
     .col-lg-12
       .lesson-form__add-answers(@click="withAnswers = !withAnswers") {{ addAnswersText }}   
@@ -75,6 +78,7 @@ export default {
       answer_2: "",
       answer_3: "",
       answer_4: "",
+      answer_5: "",
       free: false,
       questionId: 0
     };
@@ -102,6 +106,7 @@ export default {
       answer_2: state.answer_2,
       answer_3: state.answer_3,
       answer_4: state.answer_4,
+      answer_5: state.answer_5,
     })
   },
   created() {
@@ -142,6 +147,7 @@ export default {
         this.answer_2 = this.initLesson?.question?.answer_2;
         this.answer_3 = this.initLesson?.question?.answer_3;
         this.answer_4 = this.initLesson?.question?.answer_4;
+        this.answer_5 = this.initLesson?.question?.answer_5;
         this.free = this.initLesson.free;
         this.correctAnswer = this.initLesson?.question?.correct_answer;
 
