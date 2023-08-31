@@ -310,7 +310,7 @@ export default {
     },
     deleteTest(test) {
       console.log(test);
-      this.lessons.splice(this.lessons.indexOf(test), 1);
+      this.tests.splice(this.tests.indexOf(test), 1);
     },
     deleteLesson(lesson) {
       this.lessons.splice(this.lessons.indexOf(lesson), 1);
