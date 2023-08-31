@@ -163,7 +163,6 @@ export default {
           .filter((lesson) => lesson.CoursesLessons?.id)
           .map((l) => l.id),
         tests: state.tests
-          .filter((test) => test.CoursesTests?.id)
           .map((t) => t.id),
         question_1: state.question_1,
         question_2: state.question_2,
