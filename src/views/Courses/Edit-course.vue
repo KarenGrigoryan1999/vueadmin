@@ -224,8 +224,8 @@ export default {
           this.answer_3 = course.answer_3;
           this.lessons = []
             .concat(course.lessons)
-            .concat(course.tests)
-            .sort((a, b) => a.position - b.position);
+            .sort((a, b) => a.position - b.position)
+            .concat(course.tests.sort((a, b) => a.position - b.position));
 
           if (course.teachers.length) {
             course.teachers.forEach((teacher) => {
