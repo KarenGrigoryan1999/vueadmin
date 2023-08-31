@@ -162,7 +162,8 @@ export default {
         lessons: state.lessons
           .filter((lesson) => lesson.CoursesLessons?.id)
           .map((l) => l.id),
-        tests: state.tests
+        tests: state.lessons
+          .filter((test) => test.CoursesTests?.id)
           .map((t) => t.id),
         question_1: state.question_1,
         question_2: state.question_2,
@@ -221,9 +222,9 @@ export default {
           this.answer_1 = course.answer_1;
           this.answer_2 = course.answer_2;
           this.answer_3 = course.answer_3;
-          this.tests = [].concat(course.tests).sort((a, b) => a.position - b.position);
           this.lessons = []
             .concat(course.lessons)
+            .concat(course.tests)
             .sort((a, b) => a.position - b.position);
 
           if (course.teachers.length) {
@@ -309,7 +310,7 @@ export default {
     },
     deleteTest(test) {
       console.log(test);
-      this.tests.splice(this.tests.indexOf(test), 1);
+      this.lessons.splice(this.lessons.indexOf(test), 1);
     },
     deleteLesson(lesson) {
       this.lessons.splice(this.lessons.indexOf(lesson), 1);
