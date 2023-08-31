@@ -222,9 +222,9 @@ export default {
           this.answer_1 = course.answer_1;
           this.answer_2 = course.answer_2;
           this.answer_3 = course.answer_3;
+          this.tests = [].concat(course.tests).sort((a, b) => a.position - b.position);
           this.lessons = []
             .concat(course.lessons)
-            .concat(course.tests)
             .sort((a, b) => a.position - b.position);
 
           if (course.teachers.length) {
