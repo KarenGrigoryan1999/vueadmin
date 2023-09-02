@@ -212,7 +212,12 @@ export default {
       };
     },
     deleteQuestion() {
-      
+      this.api._delete(`/questions/${this.questionToDelete.id}`).then((r) => {
+        if (r.data.deleted) {
+          this.questions.splice(this.questions.indexOf(this.questionToDelete), 1);
+          this.questionToDelete = {};
+        }
+      });
     },
     changePosition() {
       this.questions.forEach((lesson, index) => {
