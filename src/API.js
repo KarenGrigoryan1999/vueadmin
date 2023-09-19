@@ -43,7 +43,7 @@ class API {
         }
       })
       .catch((e) => {
-        if (e.response.status) {
+        if (e.response && e.response.status) {
           this.logout();
           throw Error();
         }
